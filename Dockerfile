@@ -1,10 +1,8 @@
-FROM python:3.13-slim
+FROM ghcr.io/astral-sh/uv:python3.13-bookworm-slim AS builder
+ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy
 
-RUN apt-get update && apt-get install -y curl git && rm -rf /var/lib/apt/lists/*
-
-# Установка uv
-RUN curl -LsSf https://astral.sh/uv/install.sh | sh && \
-    mv /root/.cargo/bin/uv /usr/local/bin/uv
+# Disable Python downloads, because we want to use the system interpreter
+ENV UV_PYTHON_DOWNLOADS=0
 
 # Установка Jupyter (через uv)
 RUN uv add jupyterlab
