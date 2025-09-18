@@ -4,6 +4,8 @@ ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy
 # Disable Python downloads, because we want to use the system interpreter
 ENV UV_PYTHON_DOWNLOADS=0
 
+RUN uv init
+
 # Установка Jupyter (через uv)
 RUN uv add jupyterlab
 
